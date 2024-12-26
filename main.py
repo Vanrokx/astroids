@@ -17,6 +17,12 @@ def main():
     #player init
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
+    #create Groups
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    updateable.add(player)
+    drawable.add(player)
+
     #Game Loop
     while True:
         pygame.Surface.fill(screen, screen_background)
@@ -25,7 +31,13 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
-        player.draw(screen)
+        
+        for obj in updateable:
+            obj.update(dt)
+        for dobj in drawable:
+            dobj.draw(screen)
+        # player.update(dt)
+        # player.draw(screen)
         
         
         
